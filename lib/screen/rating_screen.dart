@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../list/item_list.dart';
+import 'package:simple_animations/simple_animations.dart';
 
 
 class RatingScreen extends StatelessWidget {
@@ -26,7 +27,6 @@ class RatingScreen extends StatelessWidget {
                 controller: _controller,
                 keyboardType: const TextInputType.numberWithOptions(decimal: true),
                 inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d{0,1}')),],
-                //[FilteringTextInputFormatter.allow(RegExp(r'^[0-5]*$\.?\d{0,1}')),],
                 onChanged: (value) => double.parse(value),
                 decoration: const InputDecoration(
                   labelText: 'Input Your Rating', 
@@ -45,7 +45,13 @@ class RatingScreen extends StatelessWidget {
                     context: context,
                     builder: (BuildContext context) => 
                       Consumer<ItemList>(builder: (context, item, child) {
-                          return AlertDialog(
+                          return PlayAnimationBuilder<double>(
+                          duration: const Duration(seconds: 4),
+                          tween: Tween(begin: 0, end: 1),
+                          builder: (context, opacity, child) {
+                            return Opacity(
+                              opacity: opacity,
+                              child: AlertDialog(
                             content: 
                               SizedBox(
                                 height: 70,
@@ -72,7 +78,10 @@ class RatingScreen extends StatelessWidget {
                                 ),
                               ),
                                   
-                            );
+                            )
+                            );});
+
+
                       })
                     );
                     _controller.clear();
