@@ -45,23 +45,23 @@ class RatingScreen extends StatelessWidget {
                     context: context,
                     builder: (BuildContext context) => 
                       Consumer<ItemList>(builder: (context, item, child) {
-                          return PlayAnimationBuilder<double>(
+                        return PlayAnimationBuilder<double>(
                           duration: const Duration(seconds: 4),
                           tween: Tween(begin: 0, end: 1),
                           builder: (context, opacity, child) {
                             return Opacity(
                               opacity: opacity,
                               child: AlertDialog(
-                            content: 
-                              SizedBox(
-                                height: 70,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Text('Your rating is : ${double.parse(item.items.last)}'),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: List.generate(5, (index) {
+                              content: 
+                                SizedBox(
+                                  height: 70,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Text('Your rating is : ${double.parse(item.items.last)}'),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: List.generate(5, (index) {
                                         
                                         return IconButton(
                                           icon: Provider.of<ItemList>(context, listen: false).getCount() > index + 1 || 
@@ -76,10 +76,11 @@ class RatingScreen extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                              ),
-                                  
+                              ),                           
                             )
-                            );});
+                          );
+                        }
+                      );
 
 
                       })
